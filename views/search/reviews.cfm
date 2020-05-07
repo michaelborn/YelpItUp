@@ -2,9 +2,9 @@
     <main>
         #renderView( "partials/form" )#
 
-        <div class="reviews">
+        <div class="reviews container mx-auto px-4">
             #renderView(
-                view = "review",
+                view = "search/review",
                 collection="#prc.reviews#"
             )#
         </div>

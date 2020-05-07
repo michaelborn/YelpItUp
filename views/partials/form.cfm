@@ -1,5 +1,5 @@
 <search class="w-full block">
-    <div class="container mx-auto px-4 py-8">
+    <div class="container mx-auto px-4 py-8 border-solid border-b-2">
         <div class="row">
             <h2 class="text-xl mb-4">Search Reviews</h2>
             <form action="/search/reviews">
