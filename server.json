@@ -1,0 +1,10 @@
+{
+    "app":{
+        "cfengine":"lucee"
+    },
+    "web":{
+        "rewrites":{
+            "enable":"true"
+        }
+    }
+}

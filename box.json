@@ -1,0 +1,21 @@
+{
+    "name":"YelpItUp",
+    "version":"1.0.0",
+    "location":"",
+    "author":"Michael Born <michael@ortussolutions.com>",
+    "slug":"yelpitup",
+    "ignore":[],
+    "devDependencies":{
+        "testbox":"^3.0.0"
+    },
+    "installPaths":{
+        "coldbox":"coldbox",
+        "testbox":"testbox",
+        "cbelasticsearch":"modules/cbelasticsearch/"
+    },
+    "dependencies":{
+        "coldbox":"^5.0.0",
+        "cbelasticsearch":"^1.4.1+224"
+    },
+    "scripts":{}
+}
