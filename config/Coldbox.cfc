@@ -6,7 +6,7 @@
 		// coldbox directives
 		coldbox = {
 			//Application Setup
-			appName 				= getSystemSetting( "APPNAME", "Your app name here" ),
+			appName 				= getSystemSetting( "APPNAME", "YelpItUp" ),
 
 			//Development Settings
 			reinitPassword			= createUUID(),
@@ -53,8 +53,12 @@
 
 		//Register interceptors as an array, we need order
 		interceptors = [
+			{ "class" : "interceptors.InitIndex" }
 		];
 
+		settings = {
+			"contentPath" : expandPath( "resources/downloads" )
+		}
 	}
 
 	/**

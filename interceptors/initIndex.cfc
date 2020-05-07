@@ -13,24 +13,48 @@ component {
 			}
 			
 			if ( !getESClient().indexExists( "businesses" ) ){
-				createSnippetIndex();
+				getIndexBuilder().new(
+					"businesses",
+					{
+						"business_id": { "type" : "keyword" },
+						"name": { "type" : "text" },
+						"address": { "type" : "text" },
+						"city": { "type" : "keyword" },
+						"state": { "type" : "keyword" },
+						"postal_code": { "type" : "integer" },
+						"latitude": { "type" : "decimal" },
+						"longitude": { "type" : "decimal" },
+						"stars": { "type" : "decimal" },
+						"review_count": { "type" : "integer" },
+						"is_open": { "type" : "boolean" },
+						"attributes": { "type" : "object" },
+						"categories": { "type" : "keyword" },
+						"hours": { "type" : "object" }
+					}
+				).save();
 			}
 			if ( !getESClient().indexExists( "reviews" ) ){
-				createCheatSheetIndex();
+				getIndexBuilder().new(
+					"reviews",
+					{
+
+					}
+				).save();
 			}
 
 			if ( recreateIndex ){
-				var snippetPath = getSetting( "contentPath" ) & "/businesses/";
 				populateIndex(
-					files = getDataFiles( path = snippetPath ),
+					files = getSetting( "contentPath" ) & "/yelp_academic_dataset_business.json",
 					path = snippetPath,
-					index = "businesses"
+					index = "businesses",
+					idKey = "business_id"
 				);
-				var cheatsheetPath = getSetting( "contentPath" ) & "/reviews/";
+				var reviewFile = ;
 				populateIndex(
-					files = getDataFiles( path = cheatsheetPath ),
+					file = getSetting( "contentPath" ) & "/yelp_academic_dataset_review.json",
 					path = cheatsheetPath,
-					index = "reviews"
+					index = "reviews",
+					idKey = "review_id"
 				);
 			}
 		} catch( io.searchbox.client.config.exception.CouldNotConnectException exception ){
@@ -42,114 +66,32 @@ component {
 		}
 	}
 
-	/**
-	 * Creates the businesses index
-	 */
-	private function createSnippetIndex(){
-		getIndexBuilder().new(
-			"businesses",
-			{
-				"_doc" = {
-					"_all" = { "enabled" = false },
-					"properties" = {
-						"slug" = { "type" = "keyword" },
-						"title" = { "type" = "text" },
-						"reviews" = { "type" = "keyword" },
-						"description" = { "type" = "text" },
-						"snippet" = {
-							"type" = "object",
-							"properties" = {
-								"type" = { "type" = "keyword" },
-								"source" = { "type" = "text" }
-							}
-						} 
-					}
-				}
-			}
-		).save();
-	}
-
-	/**
-	 * Creates the reviews index
-	 */
-	private function createCheatSheetIndex(){
-		getIndexBuilder().new(
-			"reviews",
-			{
-				"_doc" = {
-					"_all" = { "enabled" = false },
-					"properties" = {
-						"title" = { "type" = "text" },
-						"description" = { "type" = "text" },
-						"slug" = { "type" = "keyword" }
-					}
-				}
-			}
-		).save();
-	}
-
-	/**
-	 * Pull the snippet JSON files from the cfbusinesses data repository.
-	 * @returns {Array} array of file names ONLY, to be paired with the content directory for fileRead() calls.
-	 */
-	array function getDataFiles( required string path ){
-		return directoryList(
-			path = expandPath( arguments.path ),
-			recurse = false,
-			listInfo = "name",
-			filter = "*.json",
-			type = "file"
-		);
-	}
-
 	function populateIndex(
 		required string path,
-		required array files,
-		string index = "businesses"
+		required string file,
+		required string index,
+		required string idKey
 	){
-		files.each( function( filename ) {
-			var filepath = expandPath( path ) & filename;
-			if ( fileExists( filepath ) ){
-				var json = fileRead( filepath );
-				if ( isJSON( json ) ){
-					var data = deSerializeJSON( json );
-					data["slug"] = replace(filename, ".json", "");
-					saveNewESDocument(
-						data = data,
-						index = index,
-						id = data.slug
-					);
-				}
-			}
-		} );
-
-		// bulk save
-		// TODO: Get it working by removing whitespace from the JSON data first
-		// @cite https://stackoverflow.com/a/48131671
-		// getESClient().saveAll( documents );
-	}
-		
-	/**
-	 * Save a given data object to a new document in ES.
-	 *
-	 * @data {Struct} the data object after derializing from JSON to struct.
-	 */
-	private function saveNewESDocument(
-		required struct data,
-		string index = "businesses",
-		string type = "_doc",
-		string id = ""
-	){
-		var document = getDocument()
-		.new(
-			index = arguments.index,
-			type = arguments.type,
-			properties = arguments.data
-		);
-		if ( arguments.id > "" ){
-			document = document.setId( arguments.id );
+		if ( !fileExists( arguments.file ) ){
+			throw( "File does not exist", "yelpItUp.interceptors.initIndex", arguments.file );
 		}
-		document.save();
+
+		var fileObject = fileOpen( arguments.file );
+		while( !fileIsEOF( fileObject ) ){
+
+			var json = fileReadLine( fileObject );
+			if ( isJSON( json ) ){
+				var data = deSerializeJSON( json );
+				getDocument()
+					.new(
+						index = arguments.index,
+						properties = data
+					)
+					.setId( data[ arguments.idKey ] )
+					.save();
+			}
+			
+		}
 	}
 
 	Client function getESClient() provider="Client@cbElasticsearch"{}
