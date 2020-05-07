@@ -57,7 +57,7 @@
 		];
 
 		settings = {
-			"contentPath" : expandPath( "resources/downloads" )
+			"contentPath" : expandPath( "resources/downloads/yelp_dataset/" )
 		}
 	}
 

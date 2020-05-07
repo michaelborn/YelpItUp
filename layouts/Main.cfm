@@ -32,7 +32,7 @@
         <div style="min-height:72vh">#renderView()#</div>
     
         <footer class="border-top py-3 mt-5 bg-gray-900 text-white">
-            <div class="container">
+            <div class="container mx-auto">
                 <div class="px-4 py-8">
                     <p class="text-center">Sample CBElasticsearch app by <a href="https://michaelborn.me">Michael Born</a></p>
                 </div>
