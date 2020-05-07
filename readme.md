@@ -1,6 +1,14 @@
 # YelpItUp
 
-A sample CBElasticsearch app.
+A sample Elasticsearch app using the [Yelp dataset](https://www.yelp.com/dataset/), [Coldbox](https://www.coldbox.org/), and [CBElasticsearch](https://cbelasticsearch.ortusbooks.com/).
+
+## Getting Started
+
+1. Clone this repo - `git clone `
+2. [Install CommandBox if you don't have it](https://commandbox.ortusbooks.com/getting-started-guide)
+3. Install dependencies - `box install`
+4. Start up a docker Elasticsearch container - `docker run -d -p 9200:9200 -e "discovery.type=single-node" elasticsearch:7.6.2`
+5. Start this app - `box start`
 
 ## The Good News
 
