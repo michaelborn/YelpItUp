@@ -1,11 +1,28 @@
 ﻿<cfoutput>
-    <main class="container mx-auto">
-        <div class="py-8 px-4">
-            <h2 class="text-xl mb-4">Welcome to YelpItUp</h2>
-            <p>A sample Elasticsearch app using the <a href="https://www.yelp.com/dataset/">Yelp dataset</a>, <a href="https://www.coldbox.org/">Coldbox</a>, and <a href="https://cbelasticsearch.ortusbooks.com/">CBElasticsearch</a>.</p>
+    <main class="container mx-auto text-center">
+        <div class="py-20 px-4">
+            <h2 class="text-4xl mb-4">Welcome to YelpItUp!</h2>
+            <p>A sample Elasticsearch app using the <a href="https://www.yelp.com/dataset/" class="underline">Yelp dataset</a>, <a href="https://www.coldbox.org/" class="underline">Coldbox</a>, and <a href="https://cbelasticsearch.ortusbooks.com/" class="underline">CBElasticsearch</a>.</p>
         </div>
-        <div class="py-8">
-            #renderView( "partials/form" )#
+        <div class="px-4 py-8 flex">
+            <div class="md:w-1/3 px-4">
+                <div class="bg-gray-100 text-blue-900 p-4">
+                    <h3 class="text-2xl">Fast</h3>
+                    <p>CbElasticsearch is fast</p>
+                </div>
+            </div>
+            <div class="md:w-1/3 px-4">
+                <div class="bg-gray-100 text-blue-900 p-4">
+                    <h3 class="text-2xl">Fluent</h3>
+                    <p>CbElasticsearch is easy for beginners</p>
+                </div>
+            </div>
+            <div class="md:w-1/3 px-4">
+                <div class="bg-gray-100 text-blue-900 p-4">
+                    <h3 class="text-2xl">Supported by Ortus</h3>
+                    <p>CbElasticsearch is Ortus-supported</p>
+                </div>
+            </div>
         </div>
     </main>
 </cfoutput>

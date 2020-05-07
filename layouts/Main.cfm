@@ -3,9 +3,9 @@
     <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Welcome to Coldbox!</title>
-        <meta name="description" content="ColdBox Application Template">
-        <meta name="author" content="Ortus Solutions, Corp">
+        <title>YelpItUp</title>
+        <meta name="description" content="Sample Elasticsearch app for CFML">
+        <meta name="author" content="Michael Born">
         <!---Base URL --->
         <base href="#event.getHTMLBaseURL()#" />
         <!---css --->
@@ -18,12 +18,12 @@
             <div class="container mx-auto px-4">
                 <div class="flex justify-between">
                     <h1 class="text-3xl flex-shrink"><a href="/">YelpItUp</a></h1>
-                    <!--- <nav class="">
+                    <nav class="">
                         <ul>
                             <li><a href="/search/reviews" class="inline-block p-4 hover:bg-blue-700 hover:text-white">Reviews</a></li>
                             <!--- <li><a href="/search/businesses" class="inline-block p-4 hover:bg-blue-700 hover:text-white">Businesses</a></li> --->
                         </ul>
-                    </nav> --->
+                    </nav>
                 </div>
             </div>
         </header>
