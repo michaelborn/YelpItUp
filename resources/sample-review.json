@@ -1,0 +1,22 @@
+{
+    "review_id": "xQY8N_XvtGbearJ5X4QryQ",
+    "user_id": "OwjRMXRC0KyPrIlcjaXeFQ",
+    "business_id": "-MhfebM0QIsKt87iDN-FNw",
+    "stars": 2.0,
+    "useful": 5,
+    "funny": 0,
+    "cool": 0,
+    "text": "As someone who has worked with many museums, I was eager to visit this gallery on my most recent trip to Las Vegas. When I saw they would be showing infamous eggs of the House of Faberge from the Virginia Museum of Fine Arts (VMFA), I knew I had to go!\n\nTucked away near the gelateria and the garden, the Gallery is pretty much hidden from view. It's what real estate agents would call \"cozy\" or \"charming\" - basically any euphemism for small.\n\nThat being said, you can still see wonderful art at a gallery of any size, so why the two *s you ask? Let me tell you:\n\n* pricing for this, while relatively inexpensive for a Las Vegas attraction, is completely over the top. For the space and the amount of art you can fit in there, it is a bit much.\n* it's not kid friendly at all. Seriously, don't bring them.\n* the security is not trained properly for the show. When the curating and design teams collaborate for exhibitions, there is a definite flow. That means visitors should view the art in a certain sequence, whether it be by historical period or cultural significance (this is how audio guides are usually developed). When I arrived in the gallery I could not tell where to start, and security was certainly not helpful. I was told to \"just look around\" and \"do whatever.\" \n\nAt such a *fine* institution, I find the lack of knowledge and respect for the art appalling.",
+    "date": "2015-04-15 05:21:16"
+}
+{
+    "review_id": { "type" : "keyword" },
+    "user_id": { "type" : "keyword" },
+    "business_id": { "type" : "keyword" },
+    "stars": { "type" : "float" },
+    "useful": { "type" : "integer" },
+    "funny": { "type" : "integer" },
+    "cool": { "type" : "integer" },
+    "text": { "type" : "text" },
+    "date": { "type" : "date" }
+}
