@@ -2,13 +2,18 @@
 
 A sample Elasticsearch app using the [Yelp dataset](https://www.yelp.com/dataset/), [Coldbox](https://www.coldbox.org/), and [CBElasticsearch](https://cbelasticsearch.ortusbooks.com/).
 
+![YelpItUp app showing sample Yelp reviews for "toast"](screenshot-search-results.png)
+
+For a full description of how this app works, check out my ITB 2020 CBElasticsearch talk [presentation](https://slides.com/michaelborn/power-up-with-cbelasticsearch#/) or [github repo](https://github.com/michaelborn/ITB2020-CBElasticsearch-talk).
+
 ## Getting Started
 
-1. Clone this repo - `git clone `
+1. Clone this repo - `git clone git@github.com:michaelborn/YelpItUp.git`
 2. [Install CommandBox if you don't have it](https://commandbox.ortusbooks.com/getting-started-guide)
-3. Install dependencies - `box install`
-4. Start up a docker Elasticsearch container - `docker run -d -p 9200:9200 -e "discovery.type=single-node" elasticsearch:7.6.2`
-5. Start this app - `box start`
+3. Download the [Yelp dataset](https://www.yelp.com/dataset) and extract to `resources/downloads/`
+4. Install dependencies - `box install`
+5. Start up a docker Elasticsearch container - `docker run -d -p 9200:9200 -e "discovery.type=single-node" elasticsearch:7.6.2`
+6. Start this app - `box start`
 
 ## The Good News
 
