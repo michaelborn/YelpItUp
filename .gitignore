@@ -18,4 +18,6 @@ coldbox/*
 testbox/*
 modules/*
 **/apidocs/**
-resources/downloads/*
+
+## Don't track the big datasets
+**.tgz

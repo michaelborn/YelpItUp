@@ -9,8 +9,8 @@
         "testbox":"^3.0.0"
     },
     "installPaths":{
-        "coldbox":"coldbox",
-        "testbox":"testbox",
+        "coldbox":"coldbox/",
+        "testbox":"testbox/",
         "cbelasticsearch":"modules/cbelasticsearch/"
     },
     "dependencies":{
