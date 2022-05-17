@@ -35,11 +35,6 @@ component {
                                 "hours": { "type" : "object" }
                             }
                         }
-                    },
-                    {
-                        "index" : {
-                            "refresh_interval" : "-1"
-                        }
                     }
                 ).save();
             }
@@ -60,11 +55,6 @@ component {
                                 "date": { "type" : "date" }
                             }
                         }
-                    },
-                    {
-                        "index" : {
-                            "refresh_interval" : "-1"
-                        }
                     }
                 ).save();
             }
@@ -78,11 +68,17 @@ component {
 
 
                 populateIndex(
-                    file = getSetting( "contentPath" ) & "reviews/xaa",
+                    file = getSetting( "contentPath" ) & "yelp_academic_dataset_review.json",
                     index = "reviews",
-                    idKey = "review_id"
+                    idKey = "review_id",
+                    maxToPopulate = 1000
                 );
             }
+
+            // tell ES it's ok to refresh the index shards now.
+            // getIndexBuilder().patch( name = "businesses", settings = { "refresh_interval" : "1s" } );
+            // getIndexBuilder().patch( name = "reviews", settings = { "refresh_interval" : "1s" } );
+
         } catch( io.searchbox.client.config.exception.CouldNotConnectException exception ){
             writeOutput( "Unable to connect to ElasticSearch." );
             abort;
@@ -92,14 +88,16 @@ component {
     function populateIndex(
         required string file,
         required string index,
-        required string idKey
+        required string idKey,
+        numeric maxToPopulate = 100
     ){
         if ( !fileExists( arguments.file ) ){
             throw( "File does not exist", "yelpItUp.interceptors.initIndex", arguments.file );
         }
 
         var fileObject = fileOpen( arguments.file );
-        while( !fileIsEOF( fileObject ) ){
+        var populatedCount = 0;
+        while( !fileIsEOF( fileObject ) && populatedCount < arguments.maxToPopulate ){
 
             var json = fileReadLine( fileObject );
             if ( isJSON( json ) ){
@@ -124,9 +122,12 @@ component {
                     )
                     .setId( data[ arguments.idKey ] )
                     .save();
+
+                populatedCount++;
             }
             
         }
+        fileClose( fileObject );
     }
 
     Client function getESClient() provider="Client@cbElasticsearch"{}
