@@ -10,10 +10,11 @@ For a full description of how this app works, check out my ITB 2020 CBElasticsea
 
 1. Clone this repo - `git clone git@github.com:michaelborn/YelpItUp.git`
 2. [Install CommandBox if you don't have it](https://commandbox.ortusbooks.com/getting-started-guide)
-3. Download the [Yelp dataset](https://www.yelp.com/dataset) and extract to `resources/downloads/`
+3. Download the [Yelp dataset](https://www.yelp.com/dataset) and extract to `resources/downloads/yelp_dataset`
 4. Install dependencies - `box install`
-5. Start up a docker Elasticsearch container - `docker run -d -p 9200:9200 -e "discovery.type=single-node" elasticsearch:7.6.2`
-6. Start this app - `box start`
+5. Start up a docker Elasticsearch container - `docker run -d -p 9210:9200 -e "discovery.type=single-node" elasticsearch:7.6.2`
+6. Copy `.env.example` to `.env`
+7. Start this app - `box start`
 
 ## The Good News
 
