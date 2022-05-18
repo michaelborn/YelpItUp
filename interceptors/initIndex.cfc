@@ -41,21 +41,7 @@ component {
             if ( !getESClient().indexExists( "reviews" ) ){
                 getIndexBuilder().new(
                     "reviews",
-                    {
-                        "_doc" = {
-                            "properties" : {
-                                "review_id": { "type" : "keyword" },
-                                "user_id": { "type" : "keyword" },
-                                "business_id": { "type" : "keyword" },
-                                "stars": { "type" : "float" },
-                                "useful": { "type" : "integer" },
-                                "funny": { "type" : "integer" },
-                                "cool": { "type" : "integer" },
-                                "text": { "type" : "text" },
-                                "date": { "type" : "date" }
-                            }
-                        }
-                    }
+                    getReviewsIndex()
                 ).save();
             }
 
@@ -135,4 +121,12 @@ component {
     IndexBuilder function getIndexBuilder() provider="IndexBuilder@cbElasticsearch"{}
 
     Document function getDocument() provider="Document@cbElasticsearch"{}
+
+    struct function getReviewsIndex(){
+        var index = new models.ReviewsIndex();
+        return {
+            "mappings" : index.getMappings(),
+            "settings" : index.getSettings()
+        };
+    }
 }
