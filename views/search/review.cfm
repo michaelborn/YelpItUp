@@ -1,6 +1,13 @@
 <cfoutput>
     <article class="p-6 border-solid border-b-2">
-        <p class="mb-4">#review.text#</p>
+        <cfif review.keyExists( "highlights" ) && !structIsEmpty(review.highlights)>
+            <cfif review.highlights.keyExists( "text" )>
+                <cfloop array="#review.highlights.text#" item="highlight">
+                    <p class="mb-4 highlight italic">...#highlight#...</p>
+                </cfloop>
+            </cfif>
+        </cfif>
+        <!--- <p class="mb-4">#review.text#</p> --->
         <div class="review__footer flex flex-row justify-start">
             <div class="stars px-2">
                 <cfloop from="1" to="#int(review.stars)#" index="starCount">

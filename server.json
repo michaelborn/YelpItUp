@@ -3,6 +3,9 @@
         "cfengine":"lucee"
     },
     "web":{
+        "HTTP":{
+            "port":"38721"
+        },
         "rewrites":{
             "enable":"true"
         }
