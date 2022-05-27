@@ -2,7 +2,7 @@
 
 A sample Elasticsearch app using the [Yelp dataset](https://www.yelp.com/dataset/), [Coldbox](https://www.coldbox.org/), and [CBElasticsearch](https://cbelasticsearch.ortusbooks.com/).
 
-![YelpItUp app showing sample Yelp reviews for "toast"](screenshot-search-results.png)
+![YelpItUp app showing sample Yelp reviews for "pickle"](includes/images/yelp-it-up-pickle-search.png)
 
 For a full description of how this app works, check out my ITB 2020 CBElasticsearch talk [presentation](https://slides.com/michaelborn/power-up-with-cbelasticsearch#/) or [github repo](https://github.com/michaelborn/ITB2020-CBElasticsearch-talk).
 
