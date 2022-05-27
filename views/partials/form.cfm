@@ -9,7 +9,7 @@
             <form action="/search/reviews">
                 <div class="flex flex-row justify-center mb-4">
                     <div class="flex flex-grow">
-                        <label for="reviewText" class="sr-only">Search text</label>
+                        <label for="reviewText" class="sr-only">Search</label>
                         <input type="search" id="reviewText" name="query" class="block p-4 bg-gray-200 text-gray-900 flex-grow" placeholder="search text" value="#encodeForHTMLAttribute( queryText )#">
                     </div>
                     <div>

@@ -18,12 +18,8 @@
             <div class="container mx-auto px-4">
                 <div class="flex justify-between">
                     <h1 class="text-3xl flex-shrink"><a href="/">YelpItUp</a></h1>
-                    <nav class="">
-                        <ul>
-                            <li><a href="/search/reviews" class="inline-block p-4 hover:bg-blue-700 hover:text-white">Reviews</a></li>
-                            <!--- <li><a href="/search/businesses" class="inline-block p-4 hover:bg-blue-700 hover:text-white">Businesses</a></li> --->
-                        </ul>
-                    </nav>
+                    
+                    #renderView( "partials/minimal_form" )#
                 </div>
             </div>
         </header>
