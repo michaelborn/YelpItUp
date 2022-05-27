@@ -9,50 +9,21 @@ component {
             var recreateIndex = true;
 
             if( recreateIndex ){
-                getESClient().deleteIndex( "businesses" );
                 getESClient().deleteIndex( "reviews" );
             }
-            
-            if ( !getESClient().indexExists( "businesses" ) ){
-                getIndexBuilder().new(
-                    "businesses",
-                    {
-                        "_doc" = {
-                            "properties" : {
-                                "business_id": { "type" : "keyword" },
-                                "name": { "type" : "text" },
-                                "address": { "type" : "text" },
-                                "city": { "type" : "keyword" },
-                                "state": { "type" : "keyword" },
-                                "postal_code": { "type" : "integer" },
-                                "latitude": { "type" : "float" },
-                                "longitude": { "type" : "float" },
-                                "stars": { "type" : "float" },
-                                "review_count": { "type" : "integer" },
-                                "is_open": { "type" : "boolean" },
-                                "attributes": { "type" : "object" },
-                                "categories": { "type" : "keyword" },
-                                "hours": { "type" : "object" }
-                            }
-                        }
-                    }
-                ).save();
-            }
+
             if ( !getESClient().indexExists( "reviews" ) ){
+                var index = new models.ReviewsIndex();
                 getIndexBuilder().new(
                     "reviews",
-                    getReviewsIndex()
+                    {
+                        "mappings" : index.getMappings(),
+                        "settings" : index.getSettings()
+                    }
                 ).save();
             }
 
             if ( recreateIndex ){
-                populateIndex(
-                    file = getSetting( "contentPath" ) & "yelp_academic_dataset_business.json",
-                    index = "businesses",
-                    idKey = "business_id"
-                );
-
-
                 populateIndex(
                     file = getSetting( "contentPath" ) & "yelp_academic_dataset_review.json",
                     index = "reviews",
@@ -60,10 +31,6 @@ component {
                     maxToPopulate = 1000
                 );
             }
-
-            // tell ES it's ok to refresh the index shards now.
-            // getIndexBuilder().patch( name = "businesses", settings = { "refresh_interval" : "1s" } );
-            // getIndexBuilder().patch( name = "reviews", settings = { "refresh_interval" : "1s" } );
 
         } catch( io.searchbox.client.config.exception.CouldNotConnectException exception ){
             writeOutput( "Unable to connect to ElasticSearch." );
@@ -121,12 +88,4 @@ component {
     IndexBuilder function getIndexBuilder() provider="IndexBuilder@cbElasticsearch"{}
 
     Document function getDocument() provider="Document@cbElasticsearch"{}
-
-    struct function getReviewsIndex(){
-        var index = new models.ReviewsIndex();
-        return {
-            "mappings" : index.getMappings(),
-            "settings" : index.getSettings()
-        };
-    }
 }
