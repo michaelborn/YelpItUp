@@ -11,15 +11,20 @@ component extends="Main" {
         prc.reviews = [];
 
         if ( event.getValue( "query", "" ) != "" ){
-            var results = getInstance( "SearchBuilder@CbElasticSearch" )
+            var search = getInstance( "SearchBuilder@CbElasticSearch" )
                             .new( "reviews" )
-                            .match( "text", event.getValue( "query" ) )
+                            .mustMatch( "text", event.getValue( "query" ) );
+
+            if ( event.getValue( "stars", "" ) != "" ){
+                search.filterTerm( "stars", event.getValue( "stars" ) );
+            }
+                            // writeDump( search.getDSL() );abort;
                             /**
                              * 🚀🚀 Uncomment for fuzzy search awesomeness! 😎😎
                              * 
                              * @cite https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html
                              */
-                            // .setQuery({
+                            // search.setQuery({
                             //     "fuzzy": {
                             //         "text": {
                             //             "value": event.getValue( "query" ),
@@ -27,7 +32,7 @@ component extends="Main" {
                             //         }
                             //     }
                             // })
-                            .highlight( {
+                            results = search.highlight( {
                                 "fields" : {
                                     "text" : {}
                                 }
